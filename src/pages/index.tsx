@@ -38,7 +38,7 @@ export default function Home({ posts }: HomeProps) {
           <span className={inter.className}>Twiter</span>
         </Link>
         <Link
-          href={"https://github.com/hamdanym"}
+          href={"https://github.com/thisham"}
           className={styles.button_like}
         >
           <BrandGithub width={16} height={16} />
