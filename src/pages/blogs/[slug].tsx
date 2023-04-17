@@ -1,16 +1,8 @@
 import MDXCustomComponents from "@modules/components/MDXCustomComponents";
 import PostPage from "@modules/components/PostPage";
-import { PostMeta, getAllPostMeta, getPostMeta } from "@modules/utils/posts";
-import { readFileSync, readdirSync } from "fs";
-import matter from "gray-matter";
-import { marked } from "marked";
-import { GetStaticPaths } from "next";
+import { getAllPostMeta, getPostMeta } from "@modules/utils/posts";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { AppContext } from "next/app";
-import { useRouter } from "next/router";
-import path from "path";
-import { useMemo } from "react";
 
 type BlogPostProps = {
   post: {

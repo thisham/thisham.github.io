@@ -1,14 +1,10 @@
-import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@modules/styles/Home2.module.css";
-import { BrandGithub, BrandTwitter, Home2, Search } from "tabler-icons-react";
+import { BrandGithub, BrandTwitter } from "tabler-icons-react";
 import Link from "next/link";
 import ProfileImage from "@modules/assets/profile.jpg";
-import PageHeader from "@modules/components/PageHeader";
 import PageMeta from "@modules/components/PageMeta";
-import PageFooter from "@modules/components/PageFooter";
-import MainLayout from "@modules/components/MainLayout";
 import { PostMeta, getAllPostMeta } from "@modules/utils/posts";
 
 const inter = Inter({ subsets: ["latin"] });

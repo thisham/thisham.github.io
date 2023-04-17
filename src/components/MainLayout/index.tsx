@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import PageMeta from "../PageMeta";
 import styles from "@modules/styles/Home2.module.css";
 import PageHeader from "../PageHeader";
 import PageFooter from "../PageFooter";

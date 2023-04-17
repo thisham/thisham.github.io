@@ -1,6 +1,5 @@
 import { PropsWithChildren } from "react";
 import PageMeta from "../PageMeta";
-import { PostMeta } from "@modules/utils/posts";
 import { Inter } from "next/font/google";
 
 type TPostHeading = {
