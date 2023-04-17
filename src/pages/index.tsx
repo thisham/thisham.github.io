@@ -8,6 +8,8 @@ import ProfileImage from "@modules/assets/profile.jpg";
 import PageHeader from "@modules/components/PageHeader";
 import PageMeta from "@modules/components/PageMeta";
 import PageFooter from "@modules/components/PageFooter";
+import MainLayout from "@modules/components/MainLayout";
+import { PostMeta, getAllPostMeta } from "@modules/utils/posts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,9 @@ type EntryItemProps = {
   summary: string;
 };
 
-export default function Home() {
+type HomeProps = { posts: PostMeta[] };
+
+export default function Home({ posts }: HomeProps) {
   const ProfileSection = () => (
     <div className={styles.profile_container}>
       <Image
@@ -64,39 +68,33 @@ export default function Home() {
     <>
       <PageMeta pageTitle="Kanjimashita" />
 
-      <div className={styles.content}>
-        <div className={styles.container}>
-          <PageHeader />
+      <div className={styles.main_content}>
+        <ProfileSection />
 
-          <main className={styles.main}>
-            <ProfileSection />
+        <div className={styles.entry_container}>
+          <h2 className={inter.className}>Kakimono</h2>
 
-            <div className={styles.entry_container}>
-              <h2 className={inter.className}>Kakimono</h2>
-
+          {posts.length ? (
+            posts.map((post, index) => (
               <EntryItem
-                slug={"/test/lorem-ipsum"}
-                title={"Lorem Ipsum Dolor sit Amet"}
-                date={new Date("4/17/2023, 5:06:00 AM").toLocaleString()}
-                summary={
-                  "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis doloremque, ducimus eligendi repellat hic suscipit maxime reprehenderit voluptates molestiae sapiente numquam at modi veritatis aspernatur, laudantium praesentium necessitatibus veniam similique."
-                }
+                key={index}
+                slug={`/blogs/${post.slug}`}
+                title={post.data["title"]}
+                date={new Date(post.data["date"]).toLocaleString()}
+                summary={`${post.content.substring(0, 160)} ...`}
               />
-
-              <EntryItem
-                slug={"/test/lorem-ipsum"}
-                title={"Lorem Ipsum Dolor sit Amet"}
-                date={new Date("4/17/2023, 5:06:00 AM").toLocaleString()}
-                summary={
-                  "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis doloremque, ducimus eligendi repellat hic suscipit maxime reprehenderit voluptates molestiae sapiente numquam at modi veritatis aspernatur, laudantium praesentium necessitatibus veniam similique."
-                }
-              />
-            </div>
-          </main>
-
-          <PageFooter />
+            ))
+          ) : (
+            <EmptyItem />
+          )}
         </div>
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const posts = getAllPostMeta();
+
+  return { props: { posts } };
 }
