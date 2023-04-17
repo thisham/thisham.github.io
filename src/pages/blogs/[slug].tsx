@@ -1,9 +1,10 @@
 import MDXCustomComponents from "@modules/components/MDXCustomComponents";
 import PostPage from "@modules/components/PostPage";
-import { PostMeta, getPostMeta } from "@modules/utils/posts";
+import { PostMeta, getAllPostMeta, getPostMeta } from "@modules/utils/posts";
 import { readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 import { marked } from "marked";
+import { GetStaticPaths } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { AppContext } from "next/app";
@@ -30,17 +31,28 @@ type BlogPostProps = {
 export default function BlogPost(props: BlogPostProps) {
   return (
     <PostPage front={props.post.data}>
-      {/* <div
-        dangerouslySetInnerHTML={{ __html: marked(props.post.content) }}
-      ></div> */}
       <MDXRemote {...props.source} components={MDXCustomComponents} />
     </PostPage>
   );
 }
 
-export async function getServerSideProps(ctx: any) {
-  const post = getPostMeta(String(ctx.query.slug));
+type TStaticPaths = {
+  paths: { params: { slug: string } }[];
+  fallback: boolean;
+};
+
+export async function getStaticProps({ params }: TStaticPaths["paths"][0]) {
+  const post = getPostMeta(String(params.slug));
   const source = await serialize(post.content);
 
   return { props: { post, source } };
+}
+
+export async function getStaticPaths() {
+  const posts = getAllPostMeta();
+
+  return {
+    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    fallback: false,
+  };
 }

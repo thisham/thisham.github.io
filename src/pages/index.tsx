@@ -93,7 +93,7 @@ export default function Home({ posts }: HomeProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const posts = getAllPostMeta();
 
   return { props: { posts } };
