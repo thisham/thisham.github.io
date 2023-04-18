@@ -2,22 +2,19 @@ import { Inter } from "next/font/google";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type ComponentProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLParagraphElement>,
-  HTMLParagraphElement
+  HTMLAttributes<HTMLSpanElement>,
+  HTMLSpanElement
 >;
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function MDXParagraph({ children }: ComponentProps) {
+export default function MDXSmall({ children }: ComponentProps) {
   return (
-    <p
+    <small
       className={inter.className}
-      style={{
-        lineHeight: 2,
-        marginBottom: 4,
-      }}
+      style={{ lineHeight: 1.5, marginBottom: 4, textAlign: "justify" }}
     >
       {children}
-    </p>
+    </small>
   );
 }

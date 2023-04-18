@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { AnchorHTMLAttributes, DetailedHTMLProps } from "react";
+import { ExternalLink } from "tabler-icons-react";
 
 type ComponentProps = DetailedHTMLProps<
   AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -15,8 +16,21 @@ export default function MDXLink(props: ComponentProps) {
   }
 
   return (
-    <Link href={props.href} className={inter.className}>
+    <Link
+      href={props.href}
+      className={inter.className}
+      style={{
+        backgroundColor: "#2c2c2c",
+        display: "inline-flex",
+        columnGap: "4px",
+        paddingLeft: "8px",
+        paddingRight: "8px",
+        width: "fit-content",
+        alignItems: "center",
+      }}
+    >
       {props.children}
+      <ExternalLink width={16} height={16} />
     </Link>
   );
 }

@@ -2,22 +2,24 @@ import { Inter } from "next/font/google";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type ComponentProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLParagraphElement>,
-  HTMLParagraphElement
+  HTMLAttributes<HTMLOListElement>,
+  HTMLOListElement
 >;
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function MDXParagraph({ children }: ComponentProps) {
+export default function MDXOrdinaryList({ children }: ComponentProps) {
   return (
-    <p
+    <ol
       className={inter.className}
       style={{
         lineHeight: 2,
         marginBottom: 4,
+        textAlign: "justify",
+        marginLeft: 32,
       }}
     >
       {children}
-    </p>
+    </ol>
   );
 }
