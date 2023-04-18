@@ -6,6 +6,12 @@ date: 2023-04-18T03:00+0800
 author: Hamdan YM. Wijaya
 ---
 
+import Image from "next/image";
+import {
+  Image20230418ProfilePage,
+  Image20230418BlogPage,
+} from "../post-images";
+
 Blog yang sederhana ini, digagas dan dibuat dalam waktu sehari dua malam sejak
 tanggal 17 April kemarin. Sampai saat ini masih belum matang apa saja yang akan
 ditulis di dalam blog ini. Rencananya, blog ini akan kutuliskan hal-hal teknis
@@ -21,7 +27,17 @@ di tahun 2022 dan menyatakan rencananya di tahun 2023. Bahkan, blog ini saja
 dibuat dengan mencontek beberapa bagian darinya. Walaupun, desain dari blog ini
 masih terkesan "asal jadi".
 
-Desain sederhana dari blog ini masih bersandar pada warna default dari NextJS
+<MDXImage
+  src={"/post-images/20230418-retrospective/blog-page.png"}
+  alt={"Tampilan halaman blog per tanggal 18 April 2023"}
+/>
+
+<MDXImage
+  src={"/post-images/20230418-retrospective/profile-page.png"}
+  alt={"Tampilan halaman profil per tanggal 18 April 2023"}
+/>
+
+Desain sederhana dari blog ini masih bersandar pada warna _default_ dari NextJS
 dan dipadukan dengan layout dari situs [aboutme.style](https://aboutme.style),
 penyedia layanan profil daring dan web blog [lambdar.me](https://lambdar.me)
 yang dimiliki dan dikelola secara pribadi oleh
