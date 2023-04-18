@@ -44,7 +44,7 @@ export default function PostPage(
 
         <div style={{ display: "flex", flexDirection: "column", rowGap: 4 }}>
           <span className={inter.className} style={{ fontSize: "small" }}>
-            Hamdan YM. Wijaya
+            {p.author}
           </span>
           <span className={inter.className} style={{ fontSize: "small" }}>
             {new Date(p.date).toLocaleString()} &sdot;{" "}
