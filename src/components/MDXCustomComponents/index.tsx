@@ -4,7 +4,6 @@ import MDXLink from "./MDXLink";
 import MDXHeading1 from "./MDXHeading1";
 import MDXHeading2 from "./MDXHeading2";
 import MDXHeading3 from "./MDXHeading3";
-import Image from "next/image";
 import MDXImage from "./MDXImage";
 import MDXSmall from "./MDXSmall";
 import MDXUnordinaryList from "./MDXUnordinaryList";
