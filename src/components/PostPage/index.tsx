@@ -37,7 +37,14 @@ export default function PostPage(
   return (
     <>
       <PageMeta pageTitle={props.front.title} />
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+          marginBottom: 36,
+        }}
+      >
         <PostHeading {...props.front} />
         <>{props.children}</>
       </div>
