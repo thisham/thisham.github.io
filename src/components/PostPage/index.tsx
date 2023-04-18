@@ -1,12 +1,16 @@
 import { PropsWithChildren } from "react";
 import PageMeta from "../PageMeta";
 import { Inter } from "next/font/google";
+import Image from "next/image";
+import ProfileImage from "@modules/assets/profile.jpg";
 
 type TPostHeading = {
   title: string;
+  description: string;
   date: string;
   lang: "ID" | "EN" | "JP";
   author: string;
+  readingSeconds: number;
 };
 
 type PostHeadingProps = TPostHeading;
@@ -25,18 +29,39 @@ export default function PostPage(
         marginBottom: 36,
       }}
     >
-      <h1 className={inter.className} style={{ marginBottom: 12 }}>
+      <h1 className={inter.className} style={{ marginBottom: 24 }}>
         {p.title}
       </h1>
-      <span className={inter.className}>
-        {new Date(p.date).toLocaleString()} | {p.author}
-      </span>
+
+      <div style={{ display: "flex", columnGap: 16, alignItems: "center" }}>
+        <Image
+          src={ProfileImage}
+          alt={"Profile Picture"}
+          width={40}
+          height={40}
+          style={{ borderRadius: "100%" }}
+        />
+
+        <div style={{ display: "flex", flexDirection: "column", rowGap: 4 }}>
+          <span className={inter.className} style={{ fontSize: "small" }}>
+            Hamdan YM. Wijaya
+          </span>
+          <span className={inter.className} style={{ fontSize: "small" }}>
+            {new Date(p.date).toLocaleString()} &sdot;{" "}
+            {Math.floor(p.readingSeconds / 60)} min{" "}
+            {Math.floor(p.readingSeconds % 60)} seconds read
+          </span>
+        </div>
+      </div>
     </div>
   );
 
   return (
     <>
-      <PageMeta pageTitle={props.front.title} />
+      <PageMeta
+        title={props.front.title}
+        description={props.front.description}
+      />
       <div
         style={{
           display: "flex",

@@ -12,6 +12,7 @@ type BlogPostProps = {
       lang: "ID" | "EN" | "JP";
       date: string;
       author: string;
+      description: string;
     };
   };
   source: MDXRemoteSerializeResult<
@@ -22,7 +23,14 @@ type BlogPostProps = {
 
 export default function BlogPost(props: BlogPostProps) {
   return (
-    <PostPage front={props.post.data}>
+    <PostPage
+      front={{
+        ...props.post.data,
+        readingSeconds: Math.ceil(
+          (props.post.content.split(" ").length / 183) * 60
+        ),
+      }}
+    >
       <MDXRemote {...props.source} components={MDXCustomComponents} />
     </PostPage>
   );

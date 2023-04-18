@@ -3,7 +3,12 @@ import PageMeta from "@modules/components/PageMeta";
 export default function Search() {
   return (
     <>
-      <PageMeta pageTitle={"Search"} />
+      <PageMeta
+        title={"Search"}
+        description={
+          "Search everything in this web. But, nowaday, this is not supported yet."
+        }
+      />
 
       <main>
         <p>blm support.</p>

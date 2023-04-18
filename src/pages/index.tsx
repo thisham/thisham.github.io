@@ -1,7 +1,12 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@modules/styles/Home2.module.css";
-import { BrandGithub, BrandTwitter } from "tabler-icons-react";
+import {
+  BrandGithub,
+  BrandLinkedin,
+  BrandTwitter,
+  Mail,
+} from "tabler-icons-react";
 import Link from "next/link";
 import ProfileImage from "@modules/assets/profile.jpg";
 import PageMeta from "@modules/components/PageMeta";
@@ -34,15 +39,25 @@ export default function Home({ posts }: HomeProps) {
           href={"https://twitter.com/hamdanym_"}
           className={styles.button_like}
         >
-          <BrandTwitter width={16} height={16} />
-          <span className={inter.className}>Twiter</span>
+          <BrandTwitter className={styles.button_like_icon} />
         </Link>
         <Link
           href={"https://github.com/thisham"}
           className={styles.button_like}
         >
-          <BrandGithub width={16} height={16} />
-          <span className={inter.className}>Github</span>
+          <BrandGithub className={styles.button_like_icon} />
+        </Link>
+        <Link
+          href={"https://linkedin.com/in/hamdanymwijaya"}
+          className={styles.button_like}
+        >
+          <BrandLinkedin className={styles.button_like_icon} />
+        </Link>
+        <Link
+          href={"mailto:hamdanym.wijaya@gmail.com"}
+          className={styles.button_like}
+        >
+          <Mail className={styles.button_like_icon} />
         </Link>
       </div>
     </div>
@@ -62,7 +77,12 @@ export default function Home({ posts }: HomeProps) {
 
   return (
     <>
-      <PageMeta pageTitle="Kanjimashita" />
+      <PageMeta
+        title={"Hamdan YM. Wijaya - FS Enjinier"}
+        description={
+          "A platform of an FS enjinier, who willing to share his projects, toughts and biscuits."
+        }
+      />
 
       <div className={styles.main_content}>
         <ProfileSection />

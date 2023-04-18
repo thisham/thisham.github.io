@@ -51,6 +51,9 @@
   display: flex;
   gap: 8px;
   margin-top: 12px;
+  max-width: 320px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .entry_container {
@@ -76,13 +79,22 @@
 }
 
 .button_like {
-  border: solid #4b4b4b 2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 8px 12px;
   border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.button_like:hover {
+  background-color: #4b4b4b;
+}
+
+.button_like_icon {
+  width: 24px;
+  height: 24px;
 }
 
 .footer {
@@ -101,10 +113,22 @@
     align-items: flex-end;
     justify-content: flex-start;
     margin-right: 36px;
+    flex-basis: 600px;
+  }
+
+  .actions_container {
+    justify-content: flex-end;
+    gap: 0;
+  }
+
+  .button_like_icon {
+    height: 16px;
+    width: 16px;
   }
 
   .entry_container {
     margin-top: 44px;
+    flex-grow: unset;
   }
 
   .profile_container h1 {
