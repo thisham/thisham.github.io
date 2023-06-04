@@ -1,4 +1,4 @@
-import styles from "@modules/styles/Home2.module.css";
+import styles from "./style.module.css";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Home2, Search } from "tabler-icons-react";
