@@ -1,3 +1,4 @@
+import { clsx } from "@modules/utils/clsx";
 import { Inter } from "next/font/google";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
@@ -10,16 +11,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function MDXOrdinaryList({ children }: ComponentProps) {
   return (
-    <ol
-      className={inter.className}
-      style={{
-        lineHeight: 2,
-        marginBottom: 4,
-        textAlign: "justify",
-        marginLeft: 32,
-      }}
-    >
-      {children}
-    </ol>
+    <ol className={clsx("leading-8 mb-4 text-justify ml-8")}>{children}</ol>
   );
 }

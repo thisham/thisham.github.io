@@ -1,154 +1,76 @@
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  @apply flex flex-col items-center w-full;
 }
 
 .container {
-  min-height: 100vh;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border: none;
+  @apply min-h-screen px-24 flex flex-col w-full border-none;
+  @apply lg:w-[800];
 }
 
 .header {
-  height: 44px;
-  margin: 12px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @apply h-11 my-3 flex justify-between items-center;
 }
 
 .main {
-  flex: 1 0 auto;
+  @apply flex-auto;
 }
 
 .main_content {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
+  @apply md:flex-row;
 }
 
 .profile_container {
-  margin: 44px 0;
-  display: flex;
-  gap: 12px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @apply m-11 flex gap-3 flex-col items-center justify-center;
+  @apply md:text-right md:items-end md:justify-end md:mr-9 md:basis-[600];
+  @apply lg:items-end lg:mr-9;
 }
 
 .profile_picture {
-  border-radius: 100%;
-  width: 156px;
-  height: 156px;
-  margin-bottom: 24px;
+  @apply rounded-full w-36 h-36 mb-6;
 }
 
 .actions_container {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  max-width: 320px;
-  justify-content: center;
-  flex-wrap: wrap;
+  @apply flex gap-2 mt-3 max-w-xs justify-center flex-wrap;
+  @apply md:justify-end md:gap-0;
 }
 
 .entry_container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 16px;
-  margin-bottom: 24px;
+  @apply flex flex-col flex-grow gap-4 mb-6;
+  @apply md:mt-11 md:flex-grow-0;
 }
 
 .entry_container h2 {
-  font-size: x-large;
-  margin-bottom: 12px;
+  @apply text-xl mb-3;
 }
 
 .entry_container h3 {
-  font-size: medium;
+  @apply text-base;
 }
 
 .entry_container p {
-  margin-top: 4px;
-  font-size: small;
+  @apply mt-1 text-sm;
 }
 
 .button_like {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  transition: all 0.3s;
-}
-
-.button_like:hover {
-  background-color: #4b4b4b;
+  @apply inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl
+    transition-all duration-300;
+  @apply hover:bg-slate-300;
+  @apply md:w-4 md:h-4;
 }
 
 .button_like_icon {
-  width: 24px;
-  height: 24px;
+  @apply w-6 h-6;
+}
+
+.profile_container h1 {
+  @apply text-lg;
+}
+
+.profile_container p {
+  @apply text-sm;
 }
 
 .footer {
-  margin: 12px 0;
-  display: flex;
-  justify-content: center;
-}
-
-@media (min-width: 701px) {
-  .main_content {
-    flex-direction: row;
-  }
-
-  .profile_container {
-    text-align: right;
-    align-items: flex-end;
-    justify-content: flex-start;
-    margin-right: 36px;
-    flex-basis: 600px;
-  }
-
-  .actions_container {
-    justify-content: flex-end;
-    gap: 0;
-  }
-
-  .button_like_icon {
-    height: 16px;
-    width: 16px;
-  }
-
-  .entry_container {
-    margin-top: 44px;
-    flex-grow: unset;
-  }
-
-  .profile_container h1 {
-    font-size: larger;
-  }
-
-  .profile_container p {
-    font-size: small;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    width: 800px;
-    border-left: 4px solid #4b4b4b;
-    border-right: 4px solid #4b4b4b;
-  }
-
-  .profile_container {
-    align-items: flex-end;
-    margin-right: 36px;
-  }
+  @apply mx-3 flex justify-center;
 }

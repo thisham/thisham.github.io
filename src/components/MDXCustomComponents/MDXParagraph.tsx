@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { clsx } from "@modules/utils/clsx";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type ComponentProps = DetailedHTMLProps<
@@ -6,18 +6,6 @@ type ComponentProps = DetailedHTMLProps<
   HTMLParagraphElement
 >;
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function MDXParagraph({ children }: ComponentProps) {
-  return (
-    <p
-      className={inter.className}
-      style={{
-        lineHeight: 2,
-        marginBottom: 4,
-      }}
-    >
-      {children}
-    </p>
-  );
+  return <p className={clsx("leading-8 mb-4 text-justify")}>{children}</p>;
 }

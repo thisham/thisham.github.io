@@ -1,3 +1,4 @@
+import { clsx } from "@modules/utils/clsx";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { AnchorHTMLAttributes, DetailedHTMLProps } from "react";
@@ -18,16 +19,10 @@ export default function MDXLink(props: ComponentProps) {
   return (
     <Link
       href={props.href}
-      className={inter.className}
-      style={{
-        backgroundColor: "#2c2c2c",
-        display: "inline-flex",
-        columnGap: "4px",
-        paddingLeft: "8px",
-        paddingRight: "8px",
-        width: "fit-content",
-        alignItems: "center",
-      }}
+      className={clsx(
+        "bg-gray-400/40 dark:bg-gray-600/30",
+        "inline-flex gap-1 px-2 w-fit items-center"
+      )}
     >
       {props.children}
       <ExternalLink width={16} height={16} />

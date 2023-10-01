@@ -1,3 +1,4 @@
+import { clsx } from "@modules/utils/clsx";
 import { Inter } from "next/font/google";
 import Image, { ImageProps } from "next/image";
 import {
@@ -20,24 +21,12 @@ const inter = Inter({ subsets: ["latin"] });
 export default function MDXImage(props: ComponentProps) {
   return (
     <div
-      style={{
-        width: "100%",
-        height: "min-content",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "12px",
-      }}
+      className={clsx(
+        "w-full min-h-fit mb-4",
+        "flex flex-col items-center gap-2"
+      )}
     >
-      <div
-        style={{
-          width: "80%",
-          position: "relative",
-          overflow: "scroll",
-          objectFit: "contain",
-        }}
-      >
+      <div className={clsx("w-[80%] relative object-contain")}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={props.src ?? ""}

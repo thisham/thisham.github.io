@@ -3,6 +3,7 @@ import PageMeta from "../PageMeta";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import ProfileImage from "@modules/assets/profile.jpg";
+import { clsx } from "@modules/utils/clsx";
 
 type TPostHeading = {
   title: string;
@@ -21,34 +22,26 @@ export default function PostPage(
   props: PropsWithChildren<{ front: TPostHeading }>
 ) {
   const PostHeading = (p: PostHeadingProps) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: 24,
-        marginBottom: 36,
-      }}
-    >
-      <h1 className={inter.className} style={{ marginBottom: 24 }}>
-        {p.title}
-      </h1>
+    <div className={clsx("flex flex-col mt-8 mb-4")}>
+      <h1 className={clsx("text-2xl font-semibold mb-4")}>{p.title}</h1>
 
-      <div style={{ display: "flex", columnGap: 16, alignItems: "center" }}>
+      <div className={clsx("flex gap-4 items-center")}>
         <Image
           src={ProfileImage}
           alt={"Profile Picture"}
           width={40}
           height={40}
-          style={{ borderRadius: "100%" }}
+          className={"rounded-full object-cover object-center aspect-square"}
         />
 
-        <div style={{ display: "flex", flexDirection: "column", rowGap: 4 }}>
-          <span className={inter.className} style={{ fontSize: "small" }}>
-            {p.author}
-          </span>
-          <span className={inter.className} style={{ fontSize: "small" }}>
-            {new Date(p.date).toLocaleString()} &sdot;{" "}
-            {Math.floor(p.readingSeconds / 60)} min{" "}
+        <div className={clsx("flex flex-col gap-1")}>
+          <span className={clsx("text-sm")}>{p.author}</span>
+          <span className={clsx("text-sm")}>
+            {new Intl.DateTimeFormat(["nl"], {
+              dateStyle: "short",
+              timeStyle: "short",
+            }).format(new Date(p.date))}{" "}
+            &sdot; {Math.floor(p.readingSeconds / 60)} min{" "}
             {Math.floor(p.readingSeconds % 60)} seconds read
           </span>
         </div>
@@ -63,12 +56,10 @@ export default function PostPage(
         description={props.front.description}
       />
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          marginBottom: 36,
-        }}
+        className={clsx(
+          "flex flex-col gap-4 mb-12 z-10 px-8",
+          "md:px-24 lg:px-36"
+        )}
       >
         <PostHeading {...props.front} />
         <>{props.children}</>

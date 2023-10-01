@@ -1,3 +1,4 @@
+import { clsx } from "@modules/utils/clsx";
 import { Inter } from "next/font/google";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
@@ -9,9 +10,5 @@ type ComponentProps = DetailedHTMLProps<
 const inter = Inter({ subsets: ["latin"] });
 
 export default function MDXHeading3({ children }: ComponentProps) {
-  return (
-    <h3 className={inter.className} style={{ lineHeight: 1.5, marginTop: 12 }}>
-      {children}
-    </h3>
-  );
+  return <h3 className={clsx("leading-6 font-semibold")}>{children}</h3>;
 }
