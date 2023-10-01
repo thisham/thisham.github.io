@@ -5,12 +5,15 @@ import {
   BrandGithub,
   BrandLinkedin,
   BrandTwitter,
+  Icon,
   Mail,
 } from "tabler-icons-react";
 import Link from "next/link";
-import ProfileImage from "@modules/assets/profile.jpg";
+import ProfileImage from "@modules/assets/profile.jpeg";
 import PageMeta from "@modules/components/PageMeta";
 import { PostMeta, getAllPostMeta } from "@modules/utils/posts";
+import { clsx } from "@modules/utils/clsx";
+import { useMemo } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,56 +27,87 @@ type EntryItemProps = {
 type HomeProps = { posts: PostMeta[] };
 
 export default function Home({ posts }: HomeProps) {
-  const ProfileSection = () => (
-    <div className={styles.profile_container}>
-      <Image
-        src={ProfileImage}
-        alt={"Profile Picture"}
-        className={styles.profile_picture}
-      />
-      <h1 className={inter.className}>Hamdan YM. Wijaya</h1>
-      <p className={inter.className}>Web Developer, nyambi jadi mobdev.</p>
+  const ProfileLink = (p: { icon: Icon; href: string }) => (
+    <Link
+      href={p.href}
+      className={clsx(
+        "p-2 rounded-md basic-transition",
+        "hover:bg-slate-400/20 active:bg-slate-300",
+        "dark:hover:bg-slate-600/20 dark:active:bg-slate-700/70",
+        "stroke-gray-950 dark:stroke-gray-50"
+      )}
+    >
+      <p.icon className={clsx("h-6 w-6")} />
+    </Link>
+  );
 
-      <div className={styles.actions_container}>
+  const ProfileSection = () => (
+    <div className={clsx("relative flex flex-col", "w-full h-screen pt-36")}>
+      <div className={clsx("flex flex-col justify-center", "p-4")}>
+        <span className={clsx("text-lg md:text-3xl")}>Hoi! Ik ben</span>
+        <h1 className={"text-[3rem] md:text-[6rem] -mt-2 mb-2 md:mb-0"}>
+          hamdan.
+        </h1>
+        <p className={clsx("text-base md:text-xl")}>
+          Een frontend engineer die tevreden in de backend.
+        </p>
+      </div>
+
+      <div className={clsx("flex flex-col lg:flex-row gap-4 px-4")}>
         <Link
-          href={"https://twitter.com/hamdanym_"}
-          className={styles.button_like}
+          href={
+            "https://docs.google.com/document/d/1e2qa0QdOyXO633zWwXn9AXyPyeHTzW9Ps_1LXseCxZg"
+          }
+          className={clsx(
+            "h-10 px-4 rounded-md font-semibold basic-transition whitespace-nowrap w-fit",
+            "flex items-center",
+            "bg-indigo-500 text-gray-50 hover:bg-indigo-400 active:bg-indigo-600",
+            "dark:bg-indigo-700 dark:hover:bg-indigo-600 dark:active:bg-indigo-800"
+          )}
+          rel={"noopener noreferrer"}
+          target={"_blank"}
         >
-          <BrandTwitter className={styles.button_like_icon} />
+          {"Mijn Resume"}
         </Link>
-        <Link
-          href={"https://github.com/thisham"}
-          className={styles.button_like}
-        >
-          <BrandGithub className={styles.button_like_icon} />
-        </Link>
-        <Link
-          href={"https://linkedin.com/in/hamdanymwijaya"}
-          className={styles.button_like}
-        >
-          <BrandLinkedin className={styles.button_like_icon} />
-        </Link>
-        <Link
-          href={"mailto:hamdanym.wijaya@gmail.com"}
-          className={styles.button_like}
-        >
-          <Mail className={styles.button_like_icon} />
-        </Link>
+
+        <div className={clsx("flex gap-2")}>
+          <ProfileLink
+            href={"https://twitter.com/hamdanym_"}
+            icon={BrandTwitter}
+          />
+          <ProfileLink href={"https://github.com/thisham"} icon={BrandGithub} />
+          <ProfileLink
+            href={"https://linkedin.com/in/hamdanymwijaya"}
+            icon={BrandLinkedin}
+          />
+          <ProfileLink href={"mailto:hamdanym.wijaya@gmail.com"} icon={Mail} />
+        </div>
       </div>
     </div>
   );
 
   const EntryItem = (p: EntryItemProps) => (
-    <div className={styles.entry_item}>
-      <Link href={p.slug}>
-        <h3 className={inter.className}>{p.title}</h3>
+    <div
+      className={clsx(
+        "flex flex-col",
+        "border rounded-md py-2 px-4",
+        "border-gray-300 dark:border-gray-800"
+      )}
+    >
+      <Link href={p.slug} className={clsx("font-semibold text-lg")}>
+        {p.title}
       </Link>
-      <small className={inter.className}>{p.date}</small>
-      <p className={inter.className}>{p.summary}</p>
+      <small className={clsx("text-xs lg:text-sm mb-4")}>
+        {new Intl.DateTimeFormat(["nl"], {
+          dateStyle: "full",
+          timeStyle: "long",
+        }).format(new Date(p.date))}
+      </small>
+      <div>{p.summary}</div>
     </div>
   );
 
-  const EmptyItem = () => <p className={inter.className}>No Content.</p>;
+  const EmptyItem = () => <p className={clsx("italic")}>No Content.</p>;
 
   return (
     <>
@@ -84,27 +118,34 @@ export default function Home({ posts }: HomeProps) {
         }
       />
 
-      <div className={styles.main_content}>
+      <section
+        className={clsx(
+          "flex flex-col justify-center",
+          "h-fit w-full px-8 py-8 md:px-24 lg:px-36",
+          "relative z-0 opacity-100"
+        )}
+      >
         <ProfileSection />
+      </section>
 
-        <div className={styles.entry_container}>
-          <h2 className={inter.className}>Kakimono</h2>
-
-          {posts.length ? (
-            posts.map((post, index) => (
-              <EntryItem
-                key={index}
-                slug={`/blogs/${post.slug}`}
-                title={post.data["title"]}
-                date={new Date(post.data["date"]).toLocaleString()}
-                summary={`${post.content.substring(0, 160)} ...`}
-              />
-            ))
-          ) : (
-            <EmptyItem />
-          )}
-        </div>
-      </div>
+      <section
+        className={clsx("min-h-[36rem] w-full px-8 py-8 md:px-24 lg:px-36")}
+      >
+        <h3 className={clsx("text-2xl mb-8")}>Mijn Posten</h3>
+        {posts.length ? (
+          posts.map((post, index) => (
+            <EntryItem
+              key={index}
+              slug={`/blogs/${post.slug}`}
+              title={post.data["title"]}
+              date={post.data["date"]}
+              summary={`${post.content.substring(0, 160)}...`}
+            />
+          ))
+        ) : (
+          <EmptyItem />
+        )}
+      </section>
     </>
   );
 }
