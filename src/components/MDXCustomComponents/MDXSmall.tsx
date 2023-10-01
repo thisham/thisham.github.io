@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { clsx } from "@modules/utils/clsx";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type ComponentProps = DetailedHTMLProps<
@@ -6,15 +6,8 @@ type ComponentProps = DetailedHTMLProps<
   HTMLSpanElement
 >;
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function MDXSmall({ children }: ComponentProps) {
   return (
-    <small
-      className={inter.className}
-      style={{ lineHeight: 1.5, marginBottom: 4, textAlign: "justify" }}
-    >
-      {children}
-    </small>
+    <small className={clsx("leading-6 mb-1 text-justify")}>{children}</small>
   );
 }

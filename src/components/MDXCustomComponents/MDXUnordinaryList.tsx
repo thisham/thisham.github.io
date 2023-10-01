@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { clsx } from "@modules/utils/clsx";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type ComponentProps = DetailedHTMLProps<
@@ -6,19 +6,9 @@ type ComponentProps = DetailedHTMLProps<
   HTMLUListElement
 >;
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function MDXUnordinaryList({ children }: ComponentProps) {
   return (
-    <ul
-      className={inter.className}
-      style={{
-        lineHeight: 2,
-        marginBottom: 4,
-        textAlign: "justify",
-        marginLeft: 32,
-      }}
-    >
+    <ul className={clsx("leading-8 mb-4 text-justify ml-8 list-disc")}>
       {children}
     </ul>
   );
