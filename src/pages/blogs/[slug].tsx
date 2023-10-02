@@ -1,5 +1,6 @@
 import MDXCustomComponents from "@modules/components/MDXCustomComponents";
 import PostPage from "@modules/components/PostPage";
+import { clsx } from "@modules/utils/clsx";
 import { getAllPostMeta, getPostMeta } from "@modules/utils/posts";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -23,16 +24,18 @@ type BlogPostProps = {
 
 export default function BlogPost(props: BlogPostProps) {
   return (
-    <PostPage
-      front={{
-        ...props.post.data,
-        readingSeconds: Math.ceil(
-          (props.post.content.split(" ").length / 183) * 60
-        ),
-      }}
-    >
-      <MDXRemote {...props.source} components={MDXCustomComponents} />
-    </PostPage>
+    <div className={clsx("mt-8")}>
+      <PostPage
+        front={{
+          ...props.post.data,
+          readingSeconds: Math.ceil(
+            (props.post.content.split(" ").length / 183) * 60
+          ),
+        }}
+      >
+        <MDXRemote {...props.source} components={MDXCustomComponents} />
+      </PostPage>
+    </div>
   );
 }
 
