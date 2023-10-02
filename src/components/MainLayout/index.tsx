@@ -11,7 +11,7 @@ export default function MainLayout({
   return (
     <div
       className={clsx(
-        "relative",
+        "relative h-fit",
         "text-gray-950 dark:text-gray-50",
         "bg-slate-50 dark:bg-slate-950"
       )}
@@ -23,15 +23,12 @@ export default function MainLayout({
         )}
       ></div>
 
-      <div className={clsx("w-full min-h-screen", "flex flex-col")}>
-        <PageHeader />
+      <div className={clsx("relative w-full min-h-screen", "flex flex-col")}>
+        <div className={clsx("w-full fixed z-20")}>
+          <PageHeader />
+        </div>
 
-        <main
-          className={clsx(
-            "w-full mb-auto flex-1 flex flex-col",
-            className ?? ""
-          )}
-        >
+        <main className={clsx("mb-auto flex-1 flex flex-col", className ?? "")}>
           {children}
         </main>
 
