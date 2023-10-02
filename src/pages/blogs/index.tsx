@@ -54,20 +54,23 @@ export default function BlogList({ posts }: HomeProps): JSX.Element {
         )}
       >
         <h3 className={clsx("text-2xl mb-8")}>Mijn Posten</h3>
-        {posts.length ? (
-          posts.map((post, index) => (
-            <EntryItem
-              key={index}
-              slug={`/blogs/${post.slug}`}
-              title={post.data["title"]}
-              date={post.data["date"]}
-              summary={`${post.content.substring(0, 160)}...`}
-              readingSeconds={(post.content.split(" ").length / 183) * 60}
-            />
-          ))
-        ) : (
-          <EmptyItem />
-        )}
+
+        <div className={clsx("flex flex-col gap-2")}>
+          {posts.length ? (
+            posts.map((post, index) => (
+              <EntryItem
+                key={index}
+                slug={`/blogs/${post.slug}`}
+                title={post.data["title"]}
+                date={post.data["date"]}
+                summary={`${post.content.substring(0, 160)}...`}
+                readingSeconds={(post.content.split(" ").length / 183) * 60}
+              />
+            ))
+          ) : (
+            <EmptyItem />
+          )}
+        </div>
       </section>
     </>
   );
