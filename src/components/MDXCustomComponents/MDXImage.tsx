@@ -34,7 +34,7 @@ export default function MDXImage(props: ComponentProps) {
           style={{ width: props.width ?? "100%" }}
         />
       </div>
-      <small className={inter.className}>{props.alt}</small>
+      <small className={clsx("text-sm")}>{props.alt}</small>
     </div>
   );
 }
