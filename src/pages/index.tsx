@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@modules/styles/Home2.module.css";
 import {
   BrandGithub,
   BrandLinkedin,
@@ -9,13 +6,9 @@ import {
   Mail,
 } from "tabler-icons-react";
 import Link from "next/link";
-import ProfileImage from "@modules/assets/profile.jpeg";
 import PageMeta from "@modules/components/PageMeta";
 import { PostMeta, getAllPostMeta } from "@modules/utils/posts";
 import { clsx } from "@modules/utils/clsx";
-import { useMemo } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
 
 type EntryItemProps = {
   slug: string;
@@ -42,7 +35,12 @@ export default function Home({ posts }: HomeProps) {
   );
 
   const ProfileSection = () => (
-    <div className={clsx("relative flex flex-col", "w-full h-screen pt-36")}>
+    <div
+      className={clsx(
+        "relative flex flex-col",
+        "w-full pt-48 md:pt-56 lg:pt-56"
+      )}
+    >
       <div className={clsx("flex flex-col justify-center", "p-4")}>
         <span className={clsx("text-lg md:text-3xl")}>Hoi! Ik ben</span>
         <h1 className={"text-[3rem] md:text-[6rem] -mt-2 mb-2 md:mb-0"}>
@@ -121,15 +119,15 @@ export default function Home({ posts }: HomeProps) {
       <section
         className={clsx(
           "flex flex-col justify-center",
-          "h-fit w-full px-8 py-8 md:px-24 lg:px-36",
+          "h-fit w-full px-8 md:px-24 lg:px-36",
           "relative z-0 opacity-100"
         )}
       >
         <ProfileSection />
       </section>
 
-      <section
-        className={clsx("min-h-[36rem] w-full px-8 py-8 md:px-24 lg:px-36")}
+      {/* <section
+        className={clsx("min-h-[40rem] w-full px-8 py-8 md:px-24 lg:px-36")}
       >
         <h3 className={clsx("text-2xl mb-8")}>Mijn Posten</h3>
         {posts.length ? (
@@ -145,7 +143,7 @@ export default function Home({ posts }: HomeProps) {
         ) : (
           <EmptyItem />
         )}
-      </section>
+      </section> */}
     </>
   );
 }
