@@ -10,6 +10,12 @@
   .basic-transition {
     @apply transition-all duration-300;
   }
+
+  .glassmorph-header {
+    @apply backdrop-blur-sm border-b;
+    @apply !bg-slate-50/30 border-gray-300;
+    @apply dark:!bg-slate-800/30 dark:border-gray-700;
+  }
 }
 
 @layer components {
