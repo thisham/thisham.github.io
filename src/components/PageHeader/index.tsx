@@ -29,7 +29,7 @@ export default function PageHeader() {
             className={clsx(
               "text-gray-950 dark:text-gray-50 bg-transparent",
               pathname.includes("blogs")
-                ? "bg-indigo-400/70 dark:bg-indigo-600/60"
+                ? "bg-indigo-400/80 dark:bg-indigo-600/60"
                 : "",
               "text-sm rounded-md py-1 px-4"
             )}
