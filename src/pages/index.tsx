@@ -20,6 +20,8 @@ export default function Home() {
         "dark:hover:bg-slate-600/20 dark:active:bg-slate-700/70",
         "stroke-gray-950 dark:stroke-gray-50"
       )}
+      rel={"noopener noreferrer"}
+      target={"_blank"}
     >
       <p.icon className={clsx("h-6 w-6")} />
     </Link>
