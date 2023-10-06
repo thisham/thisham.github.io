@@ -1,0 +1,134 @@
+---
+title: Laravel, Request, dan Validation
+description: The request and its validation on Laravel.
+lang: ID
+date: 2023-10-07T04:02+0800
+author: Hamdan YM. Wijaya
+---
+
+Beberapa hari ini gua develop aplikasi berbasis laravel dengan Bahasa PHP. Gua
+kolaborasi sama orang-orang yang ngerti sama network security. Gua baru tahu
+kalau ada beberapa hal yang menurut beberapa "tutorial" dan "course" aman,
+ternyata ga terlalu bisa dibilang aman.
+
+Cara koding request handling yang diterapin seperti di snippet 1 yang diajarin
+pada beberapa "course" dan "tutorial", ternyata ga terlalu aman. Teknik koding
+ini bisa dijebol jika request mengalami sabotase saat pengiriman.
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\TestRequest;
+
+class TestController extends Controller
+{
+  public function handleUnsafePost1(TestRequest $request)
+  {
+    $data = $request->post();
+    return response()->json([
+      'meta' => [
+        'code' => 200,
+        'message' => 'OK'
+      ],
+      'data' => $data
+    ], 200);
+  }
+
+  public function handleUnsafePost2(TestRequest $request)
+  {
+    $data = $request->all();
+    return response()->json([
+      'meta' => [
+        'code' => 200,
+        'message' => 'OK'
+      ],
+      'data' => $data
+    ], 200);
+  }
+
+  public function handleUnsafePost3(TestRequest $request)
+  {
+    return response()->json([
+      'meta' => [
+        'code' => 200,
+        'message' => 'OK'
+      ],
+      'data' => $request
+    ], 200);
+  }
+}
+
+```
+
+<small>Snippet 1. Handle Unsafe request.</small>
+
+Kode yang ada di snippet 1 itu sebenarnya sudah validasi request. Jika diuji
+dengan metode blackbox, request validation akan jalan sebagaimana mestinya.
+Inputan yang tidak sesuai dengan ketentuan di `TestRequest` akan terdepak ke
+halaman sebelumnya.
+
+Namun, kodingan ketiga method di snippet 1 ternyata bisa dijebol kalau kena
+_intruder_. Walaupun validation `TestRequest` udah jalan di blackbox normal,
+ternyata validation ga akan jalan saat kena serangan sabotase tadi. Detail
+serangan yang dilakuin akan gua tulis di artikel selanjutnya. Kelemahan ini
+jadi temuan saat audit keamanan kode saat ngadepin serangan.
+
+Beruntungnya, dari Laravel telah menyediakan jalan lain, yang setelah pengujian
+keamanan ternyata ga jebol. Class turunan dari `Request` telah menyediakan
+method yang bisa digunain buat validasi, yaitu `validate`. Validasi data juga
+bisa dilakuin di controller, tapi kodingan akan terlihat kurang rapi.
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\TestRequest;
+use Illuminiate\Http\Request;
+
+class TestController extends Controller
+{
+  public function handleSafePost1(Request $request)
+  {
+    $valid = Validator::make($request->all(), [
+      'title' => 'required|unique:posts|max:255',
+      'body' => 'required',
+    ]);
+
+    if ($valid->fails())
+      return redirect()->back();
+
+    return response()->json([
+      'meta' => [
+        'code' => 200,
+        'message' => 'OK'
+      ],
+      'data' => $valid->validated()
+    ], 200);
+  }
+
+  public function handleSafePost2(TestRequest $request)
+  {
+    $data = $request->validated();
+
+    return response()->json([
+      'meta' => [
+        'code' => 200,
+        'message' => 'OK'
+      ],
+      'data' => $data
+    ], 200);
+  }
+}
+
+```
+
+<small>Snippet 2. Handle Safe request.</small>
+
+Jadi, sebenernya validation yang berjalan di class turunan `Request` itu hanya
+ada di awal instantiate aja kalau request dijalankan secara normal. Tetapi ga
+bisa handle saat data input dilempar ke controller, sehingga perlu di-validate
+lagi saat ada di controller. Mungkin di post selanjutnya akan gua tulis
+kronologi sabotase yang digunakan. Dank je well!
