@@ -15,16 +15,17 @@ type HomeProps = { posts: PostMeta[] };
 
 export default function BlogList({ posts }: HomeProps): JSX.Element {
   const EntryItem = (p: EntryItemProps) => (
-    <div
+    <Link
+      href={p.slug}
       className={clsx(
         "flex flex-col",
+        "hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150",
         "border rounded-md py-2 px-4",
+        "hover:bg-gray-50/30 dark:hover:bg-gray-700/50 active:bg-gray-50/70 active:dark:bg-gray-700/70",
         "border-gray-300 dark:border-gray-800"
       )}
     >
-      <Link href={p.slug} className={clsx("font-semibold text-lg")}>
-        {p.title}
-      </Link>
+      <div className={clsx("font-semibold text-lg")}>{p.title}</div>
       <small className={clsx("text-xs lg:text-sm mb-4")}>
         {new Intl.DateTimeFormat(["nl"], {
           dateStyle: "short",
@@ -34,7 +35,7 @@ export default function BlogList({ posts }: HomeProps): JSX.Element {
         {Math.floor(p.readingSeconds % 60)} seconds read
       </small>
       <div>{p.summary}</div>
-    </div>
+    </Link>
   );
 
   const EmptyItem = () => <p className={clsx("italic")}>No Content.</p>;
@@ -55,7 +56,7 @@ export default function BlogList({ posts }: HomeProps): JSX.Element {
       >
         <h3 className={clsx("text-2xl mb-8")}>Mijn Posten</h3>
 
-        <div className={clsx("flex flex-col gap-2")}>
+        <div className={clsx("flex flex-col gap-4")}>
           {posts.length ? (
             posts.map((post, index) => (
               <EntryItem
