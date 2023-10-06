@@ -70,7 +70,7 @@ export default function Home({ posts }: HomeProps) {
 
         <div className={clsx("flex gap-2")}>
           <ProfileLink
-            href={"https://twitter.com/hamdanym_"}
+            href={"https://twitter.com/hnswid"}
             icon={BrandTwitter}
           />
           <ProfileLink href={"https://github.com/thisham"} icon={BrandGithub} />
