@@ -7,19 +7,10 @@ import {
 } from "tabler-icons-react";
 import Link from "next/link";
 import PageMeta from "@modules/components/PageMeta";
-import { PostMeta, getAllPostMeta } from "@modules/utils/posts";
+import { getAllPostMeta } from "@modules/utils/posts";
 import { clsx } from "@modules/utils/clsx";
 
-type EntryItemProps = {
-  slug: string;
-  title: string;
-  date: string;
-  summary: string;
-};
-
-type HomeProps = { posts: PostMeta[] };
-
-export default function Home({ posts }: HomeProps) {
+export default function Home() {
   const ProfileLink = (p: { icon: Icon; href: string }) => (
     <Link
       href={p.href}
@@ -84,29 +75,6 @@ export default function Home({ posts }: HomeProps) {
     </div>
   );
 
-  const EntryItem = (p: EntryItemProps) => (
-    <div
-      className={clsx(
-        "flex flex-col",
-        "border rounded-md py-2 px-4",
-        "border-gray-300 dark:border-gray-800"
-      )}
-    >
-      <Link href={p.slug} className={clsx("font-semibold text-lg")}>
-        {p.title}
-      </Link>
-      <small className={clsx("text-xs lg:text-sm mb-4")}>
-        {new Intl.DateTimeFormat(["nl"], {
-          dateStyle: "full",
-          timeStyle: "long",
-        }).format(new Date(p.date))}
-      </small>
-      <div>{p.summary}</div>
-    </div>
-  );
-
-  const EmptyItem = () => <p className={clsx("italic")}>No Content.</p>;
-
   return (
     <>
       <PageMeta
@@ -125,25 +93,6 @@ export default function Home({ posts }: HomeProps) {
       >
         <ProfileSection />
       </section>
-
-      {/* <section
-        className={clsx("min-h-[40rem] w-full px-8 py-8 md:px-24 lg:px-36")}
-      >
-        <h3 className={clsx("text-2xl mb-8")}>Mijn Posten</h3>
-        {posts.length ? (
-          posts.map((post, index) => (
-            <EntryItem
-              key={index}
-              slug={`/blogs/${post.slug}`}
-              title={post.data["title"]}
-              date={post.data["date"]}
-              summary={`${post.content.substring(0, 160)}...`}
-            />
-          ))
-        ) : (
-          <EmptyItem />
-        )}
-      </section> */}
     </>
   );
 }
